@@ -1,7 +1,7 @@
 
 export const ImageGallery = () => {
   return (
-    <ul class="gallery">
+    <ul className="gallery">
       {/* <!-- Набір <li> із зображеннями --> */}
     </ul>
   )
