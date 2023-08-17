@@ -2,7 +2,6 @@ import { Component } from 'react';
 import { ModalImg } from "components/Modal/Modal"
 import { GalleryItem, ImageGalleryItemImage } from "./ImageGalleryItem.styled"
 
-
 export class ImageGalleryItem extends Component {
   state = {
   isModalOpen: false,
@@ -16,7 +15,7 @@ export class ImageGalleryItem extends Component {
 
      return (   
     <GalleryItem className="gallery-item">
-      <ImageGalleryItemImage onClick={this.openModal} src={imgUrl} alt={tags} width="320" />
+      <ImageGalleryItemImage onClick={this.openModal} src={imgUrl} alt={tags} width="240" />
          <ModalImg
            largeUrl={imgLarge}
            isModalOpen={this.state.isModalOpen}

@@ -1,4 +1,5 @@
 import Modal from 'react-modal';
+import { Overlay, WrapImg } from './Modal.styled';
 
 const customStyles = {
   content: {
@@ -6,7 +7,7 @@ const customStyles = {
     left: '50%',
     right: 'auto',
     bottom: 'auto',
-    marginRight: '-50%',
+    marginRight: '-20%',
     transform: 'translate(-50%, -50%)',
   },
 };
@@ -21,11 +22,11 @@ export const ModalImg  = ({largeUrl,tags,isModalOpen,onClose}) => {
         style={customStyles}
         contentLabel="onRequestClose Example"
       >
-      <div className="overlay">
-      <div className="modal">
+      <Overlay className="overlay">
+      <WrapImg className="modal">
        <img src={largeUrl} alt={tags} />
-      </div>
-    </div>
+      </WrapImg>
+    </Overlay>
     </Modal>     
     )
 }

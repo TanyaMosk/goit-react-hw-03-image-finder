@@ -62,8 +62,8 @@ export class App extends Component{
     return (
     <Container>
       <Searchbar onSubmit={this.setImage} />         
-        <ImageGallery images={this.state.images} />  
-        <Button onClick={this.handleLoadMore}/>      
+        <ImageGallery images={this.state.images} />   
+        {this.state.images.length !== 0 && <Button onClick={this.handleLoadMore}/>}              
       <GlobalStyle/>  
     </Container>
     )
