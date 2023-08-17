@@ -44,7 +44,14 @@ export class App extends Component{
     });
    };
 
-  setImage = () => { };
+  setImage = (evt) => {
+    evt.preventDefault()
+    if (evt.target.elements.query.value.trim() !== '') {
+       this.changeQuery(evt.target.elements.query.value) 
+        evt.target.reset()  
+    }
+       
+   };
 
   handleLoadMore = () => { 
     this.setState(prevState => ({ page: prevState.page + 1 }));
@@ -54,19 +61,14 @@ export class App extends Component{
    
     return (
     <Container>
-      <Searchbar onSubmit={(evt) => {
-        evt.preventDefault()
-        this.changeQuery(evt.target.elements.query.value) 
-        evt.target.reset()    
-        }} />         
+      <Searchbar onSubmit={this.setImage} />         
         <ImageGallery images={this.state.images} />  
         <Button onClick={this.handleLoadMore}/>      
       <GlobalStyle/>  
     </Container>
     )
   }
-}  
-  
+}    
   
   
   // indexOf , slice
