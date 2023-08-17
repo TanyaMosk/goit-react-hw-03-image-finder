@@ -72,6 +72,7 @@ export class App extends Component{
   // indexOf , slice
 // query: `${Date.now()} /${newQuery}`
 
+// eslint-disable-next-line
 {/* <header className="searchbar">
       <form className="form" onSubmit={(evt) => {
         evt.preventDefault()
