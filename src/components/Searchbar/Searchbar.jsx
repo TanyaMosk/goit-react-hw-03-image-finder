@@ -12,9 +12,7 @@ const Searchbar = ({onSubmit}) => {
         </SearchFormBtn>
         <SearchFormInput   
           name="query"           
-          type="text"
-          // autocomplete="off"
-          // autofocus          
+          type="text"              
           placeholder="Search images and photos"
         />         
       </SearchForm>
