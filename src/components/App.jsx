@@ -1,44 +1,48 @@
-
 import { Component } from "react";
-import { Searchbar } from "./Searchbar/Searchbar";
-import { ImageGallery } from "./ImageGallery/ImageGallery";
+import { ToastContainer, toast } from 'react-toastify';
 import { fetchImages } from "api";
 import { GlobalStyle } from "./GlobalStyle";
 import { Container } from "./App.styled";
-import { Button } from "./Button/Button";
+import Searchbar from "./Searchbar";
+import ImageGallery from "./ImageGallery";
+import Button from "./Button";
+import Loader from "./Loader";
+import 'react-toastify/dist/ReactToastify.css';
 
 export class App extends Component{
   state = {
-    query:'',
+    query: '',    
     images: [],
     page: 1,
+    loading: false,
   }   
   
-  async componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(prevProps, prevState) { 
     const prevQuery = prevState.query;
-    const nextQuery = this.state.query;
+    const nextQuery = this.state.query;   
 
-    if (prevQuery !== nextQuery || prevState.page !== this.state.page) {
-      // const images = await fetchImages(nextQuery, this.state.page);
-     
-      const {hits} = await fetchImages(nextQuery, this.state.page);
-      const images = hits.map(
-        ({ id, webformatURL, tags, largeImageURL }) => ({
-          id,
-          webformatURL,
-          tags,
-          largeImageURL,
-        })
-      );      
-      this.setState(prevState => ({
-        images: [...prevState.images, ...images]
-      }))      
-    };     
+    if (prevQuery !== nextQuery || prevState.page !== this.state.page) {     
+
+      this.setState({ loading: true });    
+      
+      const newQuery = nextQuery.slice(nextQuery.indexOf('/') + 1);   
+
+    try{
+      const images = await fetchImages(newQuery, this.state.page);
+       
+        this.setState(prevState => ({
+          images: [...prevState.images, ...images.hits]
+        }))
+    } catch(error) {
+        toast.error("Oops, something went wrong 🥺. Please try reloading the page!");
+        }
+        this.setState({ loading: false });       
+    };      
   }
 
   changeQuery = (newQuery) => {
-    this.setState({
-      query: newQuery,
+    this.setState({     
+      query: `${Date.now()} /${newQuery}`,
       images: [],
       page: 1,
     });
@@ -46,51 +50,50 @@ export class App extends Component{
 
   setImage = (evt) => {
     evt.preventDefault()
-    if (evt.target.elements.query.value.trim() !== '') {
-       this.changeQuery(evt.target.elements.query.value) 
+    const queryValue = evt.target.elements.query.value.trim();
+
+    if (queryValue === '') {      
+      toast.info('🦄 Please fill in the field!');
+      return;
+   } 
+   
+    if (queryValue !== '') {
+       this.changeQuery(queryValue) 
         evt.target.reset()  
-    }
-       
+    }      
+    if(this.state.images.length === 0){
+      return toast.info('Sorry, there are no images matching your search query. Please try again!🥺');
+    } 
    };
 
   handleLoadMore = () => { 
-    this.setState(prevState => ({ page: prevState.page + 1 }));
+    this.setState(prevState => ({ page: prevState.page + 1 })); 
+    this.setState({ loading: true });  
   };  
 
   render() {    
-   
+    const { loading, images } = this.state;
     return (
     <Container>
-      <Searchbar onSubmit={this.setImage} />         
-        <ImageGallery images={this.state.images} />   
-        {this.state.images.length !== 0 && <Button onClick={this.handleLoadMore}/>}              
-      <GlobalStyle/>  
+        <Searchbar onSubmit={this.setImage} />          
+        <ImageGallery images={images} />   
+        {loading && <Loader/>}
+        {images.length !== 0  && <Button onClick={this.handleLoadMore} />}         
+        <GlobalStyle />  
+        <ToastContainer
+        autoClose={3000}
+        position="top-right"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        />
     </Container>
     )
   }
-}    
+}     
   
-  
-  // indexOf , slice
-// query: `${Date.now()} /${newQuery}`
-
-// eslint-disable-next-line
-{/* <header className="searchbar">
-      <form className="form" onSubmit={(evt) => {
-        evt.preventDefault()
-        this.changeQuery(evt.target.elements.query.value) 
-        evt.target.reset()    
-          }}>
-            <button type="submit" className="button"  >
-          <span className="button-label">Search</span>
-        </button>
-        <input   
-          name="query"      
-          className="input"
-          type="text"
-          // autocomplete="off"
-          // autofocus          
-          placeholder="Search images and photos"
-        />         
-      </form>
-      </header> */}

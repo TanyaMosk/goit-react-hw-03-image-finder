@@ -1,51 +1,48 @@
 import styled from 'styled-components'
 
+export const Header = styled.header`
+padding: 10px;
+background-color: darkblue;
+`;
+
 export const SearchForm = styled.form`
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 600px;
+  max-width: 500px;
   background-color: #fff;
   border-radius: 3px;
   overflow: hidden;
-  
+  margin: auto;
 `;
 
 export const SearchFormBtn = styled.button`
   display: inline-block;
-  width: 36px;
-  height: 36px;
+  width: 35px;
+  height: 35px;
   border: 0;
-  padding: 0;
-  /* background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg'); */
-  /* background-size: 40%; */
-  /* background-repeat: no-repeat; */
-  /* background-position: center; */
+  padding: 0;  
   opacity: 0.6;
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   outline: none;
+  background-color: gainsboro;
 
   &:hover{
     opacity: 1;
+    background-color: whitesmoke;    
   }
 `;
 
-export const SearchFormBtnLabel = styled.span`
-  /* position: absolute; */
+export const SearchFormBtnLabel = styled.span`  
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;;
-  /* width: 50px; */
-  /* height: 50px; */
-  color: black;
+  padding: 10px;;  
   padding: 0;
-  overflow: hidden;
-  /* clip: rect(0, 0, 0, 0); */
+  overflow: hidden; 
   white-space: nowrap;
-  /* clip-path: inset(50%); */
-  border: 0;
+  border: 0; 
 `;
 
 export const SearchFormInput = styled.input`
@@ -54,8 +51,9 @@ export const SearchFormInput = styled.input`
   font: inherit;
   font-size: 20px;
   padding: 5px;
-  /* border: none; */
-  /* outline: none; */
-  padding-left: 4px;
+  color: darkblue;
+  padding-left: 10px;
   padding-right: 4px;
+  outline: none;
+  border: none;
 `;

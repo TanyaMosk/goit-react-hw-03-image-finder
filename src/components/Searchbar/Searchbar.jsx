@@ -1,24 +1,25 @@
-import { SearchForm, SearchFormBtn, SearchFormBtnLabel, SearchFormInput } from "components/Searchbar/Searchbar.styled";
+import { Header, SearchForm, SearchFormBtn, SearchFormBtnLabel, SearchFormInput } from "components/Searchbar/Searchbar.styled";
 import {GrSearch} from "react-icons/gr"
 
-export const Searchbar = ({onSubmit}) => {
+const Searchbar = ({onSubmit}) => {
   return (
-   <header className="searchbar">
-      <SearchForm className="form" onSubmit={onSubmit}>
-        <SearchFormBtn type="submit" className="button"  >         
-          <SearchFormBtnLabel className="button-label">
+   <Header>
+      <SearchForm  onSubmit={onSubmit}>
+        <SearchFormBtn type="submit" >         
+          <SearchFormBtnLabel >
             <GrSearch/>
           </SearchFormBtnLabel>
         </SearchFormBtn>
         <SearchFormInput   
-          name="query"      
-          className="input"
+          name="query"           
           type="text"
           // autocomplete="off"
           // autofocus          
           placeholder="Search images and photos"
         />         
       </SearchForm>
-    </header> 
+    </Header> 
   )
 };
+
+export default Searchbar;

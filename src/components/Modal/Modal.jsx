@@ -1,5 +1,5 @@
 import Modal from 'react-modal';
-import { Overlay, WrapImg } from './Modal.styled';
+import { Overlay} from './Modal.styled';
 
 const customStyles = {
   content: {
@@ -14,7 +14,7 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
-export const ModalImg  = ({largeUrl,tags,isModalOpen,onClose}) => {
+const ModalImg  = ({largeUrl,tags,isModalOpen,onClose}) => {
   return (
     <Modal
         isOpen={isModalOpen}        
@@ -22,12 +22,13 @@ export const ModalImg  = ({largeUrl,tags,isModalOpen,onClose}) => {
         style={customStyles}
         contentLabel="onRequestClose Example"
       >
-      <Overlay className="overlay">
-      <WrapImg className="modal">
+      <Overlay >
+      <div >
        <img src={largeUrl} alt={tags} />
-      </WrapImg>
+      </div>
     </Overlay>
     </Modal>     
     )
 }
 
+export default ModalImg;
