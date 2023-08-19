@@ -34,6 +34,7 @@ export class App extends Component{
       if(images.hits.length === 0){
         this.setState({
           noResults: true,
+          loading: false,
         })        
         return;
       };
