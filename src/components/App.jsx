@@ -52,7 +52,7 @@ export class App extends Component{
 
   changeQuery = (newQuery) => {
     this.setState({     
-      query: `${Date.now()} /${newQuery}`,
+      query: `${Date.now()}/${newQuery}`,
       images: [],
       page: 1,
     });
